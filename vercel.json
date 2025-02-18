@@ -14,7 +14,7 @@
   ],
   "build": {
     "env": {
-      "PYTHON_VERSION": "3.12",
+      "PYTHON_VERSION": "3.9",
       "APT_INSTALL": "python3-distutils"
     }
   }
