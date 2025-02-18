@@ -1,7 +1,7 @@
+distutils
 requests==2.26.0
 flask==2.0.2
 pandas==2.0.0
 numpy==1.24.0
 sqlalchemy==1.4.25
 gunicorn==20.1.0
-distutils
