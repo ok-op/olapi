@@ -1,21 +1,5 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "api/index.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "api/index.py"
-    }
-  ],
-  "build": {
-    "env": {
-      "PYTHON_VERSION": "3.9",
-      "APT_INSTALL": "python3-distutils"
-    }
-  }
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/api/index" }
+  ]
 }
