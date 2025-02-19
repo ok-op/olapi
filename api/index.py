@@ -167,35 +167,57 @@ async def format_message(link_data):
 
 @app.route('/')
 def hello_world():
-  #result = bot.get_me()
-  response = {'status': 'success', 'message': 'Working Fully',' Channel': '@Opleech_WD || @Opleech'}
-  return response
+    response = {
+        'status': '✅ Success!',
+        'message': '🚀 Terabox API is working perfectly!',
+        'channel': '📢 Join our channels: @Opleech_WD || @Opleech',
+        'support': '🛠 Need help? Contact our support!',
+        'update': '🔔 Stay tuned for future updates!'
+    }
+    return response
 
 
 @app.route(rule='/api', methods=['GET'])
 async def Api():
-  try:
-      url = request.args.get('url', 'No URL Provided')
-      logging.info(f"Received request for URL: {url}")
-      link_data = await fetch_download_link_async(url)
-      if link_data:
-          tasks = [format_message(item) for item in link_data]
-          formatted_message = await asyncio.gather(*tasks)
-        #   formatted_message = await format_message(link_data[0])
-          logging.info(f"Formatted message: {formatted_message}")
-      else:
-          formatted_message = None
-      response = { 'ShortLink': url, 'Extracted Info': formatted_message,'status': 'success'}
-      return jsonify(response)
-  except Exception as e:
-      logging.error(f"An error occurred: {e}")
-      return jsonify({'status': 'error', 'message': str(e), 'Link': url})
+    try:
+        url = request.args.get('url', '⚠️ No URL Provided!')
+        logging.info(f"📥 Received request for URL: {url}")
+        
+        link_data = await fetch_download_link_async(url)
+        if link_data:
+            tasks = [format_message(item) for item in link_data]
+            formatted_message = await asyncio.gather(*tasks)
+            logging.info(f"✅ Formatted message: {formatted_message}")
+        else:
+            formatted_message = None
+        
+        response = {
+            '🔗 ShortLink': url,
+            '📜 Extracted Info': formatted_message,
+            '✅ Status': 'Success'
+        }
+        return jsonify(response)
+
+    except Exception as e:
+        logging.error(f"❌ An error occurred: {e}")
+        return jsonify({
+            '❌ Status': 'Error',
+            '⚠️ Message': str(e),
+            '🔗 Link': url
+        })
 
 @app.route(rule='/help', methods=['GET'])
 async def help():
-  try:
-      response = { 'Info': "There is Only one Way to Use This as Show Below", 'Example':'https://server_url/api?url=https://terafileshare.com/s/1_1SzMvaPkqZ-yWokFCrKyA'}
-      return jsonify(response)
-  except Exception as e:
-      logging.error(f"An error occurred: {e}")
-      response = { 'Info': "There is Only one Way to Use This as Show Below", 'Example':'https://server_url/api?url=https://terafileshare.com/s/1_1SzMvaPkqZ-yWokFCrKyA'}
+    try:
+        response = {
+            'ℹ️ Info': "📌 There is only one way to use this API, as shown below:",
+            '🛠 Example': '🔗 https://server_url/api?url=https://terafileshare.com/s/1_1SzMvaPkqZ-yWokFCrKyA'
+        }
+        return jsonify(response)
+
+    except Exception as e:
+        logging.error(f"❌ An error occurred: {e}")
+        response = {
+            'ℹ️ Info': "📌 There is only one way to use this API, as shown below:",
+            '🛠 Example': '🔗 https://server_url/api?url=https://terafileshare.com/s/1_1SzMvaPkqZ-yWokFCrKyA'
+        }
